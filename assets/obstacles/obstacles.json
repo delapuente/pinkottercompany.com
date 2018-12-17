@@ -1,0 +1,84 @@
+{"frames": {
+
+"Otter_Hide01.png":
+{
+	"frame": {"x":47,"y":72,"w":42,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":29,"w":42,"h":26},
+	"sourceSize": {"w":55,"h":55}
+},
+"Otter_Hide02.png":
+{
+	"frame": {"x":0,"y":108,"w":41,"h":51},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":4,"w":41,"h":51},
+	"sourceSize": {"w":55,"h":55}
+},
+"Otter_Hide03.png":
+{
+	"frame": {"x":42,"y":98,"w":42,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":34,"w":42,"h":21},
+	"sourceSize": {"w":55,"h":55}
+},
+"Otter_Hide04.png":
+{
+	"frame": {"x":98,"y":0,"w":27,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":39,"w":27,"h":16},
+	"sourceSize": {"w":55,"h":55}
+},
+"Otter_Idle01.png":
+{
+	"frame": {"x":47,"y":41,"w":42,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":24,"w":42,"h":31},
+	"sourceSize": {"w":55,"h":55}
+},
+"Otter_Idle02.png":
+{
+	"frame": {"x":0,"y":82,"w":42,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":29,"w":42,"h":26},
+	"sourceSize": {"w":55,"h":55}
+},
+"Poo_Idle01.png":
+{
+	"frame": {"x":51,"y":0,"w":47,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":14,"w":47,"h":41},
+	"sourceSize": {"w":55,"h":55}
+},
+"Poo_Idle02.png":
+{
+	"frame": {"x":0,"y":41,"w":47,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":14,"w":47,"h":41},
+	"sourceSize": {"w":55,"h":55}
+},
+"Poo_Idle03.png":
+{
+	"frame": {"x":0,"y":0,"w":51,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":14,"w":51,"h":41},
+	"sourceSize": {"w":55,"h":55}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "obstacles.png",
+	"format": "RGBA8888",
+	"size": {"w":128,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2338c82cbd264cb6ce73a211c882860a:e812235c4568a2af0142d665682a7609:d9b85c7ca6eefcfbcaeca01564fe4396$"
+}
+}
