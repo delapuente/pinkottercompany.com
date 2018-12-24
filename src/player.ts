@@ -17,7 +17,7 @@ export class Player extends Arcade.Sprite {
   }
 
   show(x: number, y: number) {
-    this.anims.play('salva-running');
+    this.anims.play('bea-running');
 
     const collisionBox = { width: 35, height: 25 };
     const body = this.body as Arcade.Body;

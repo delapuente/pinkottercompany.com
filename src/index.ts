@@ -48,6 +48,7 @@ class MainTrack extends Phaser.Scene {
   create() {
     Player.setupAnimations(this);
     Cacota.setupAnimations(this);
+    HappyOMeter.setupAnimations(this);
 
     const bg = this.add.image(0, 0, 'bg').setOrigin(0, 0);
 
