@@ -1,6 +1,7 @@
 import { Player } from './player';
 import { Cacota } from './obstacles';
 import { Control } from './control';
+import { HappyOMeter } from './happy-o-meter';
 
 const physicalResolution = {
   width: 800,
@@ -11,6 +12,8 @@ import Arcade = Phaser.Physics.Arcade;
 class MainTrack extends Phaser.Scene {
 
   control: Control;
+
+  hapyness: HappyOMeter;
 
   player: Player;
 
@@ -34,6 +37,11 @@ class MainTrack extends Phaser.Scene {
       'obstacles',
       'assets/obstacles/obstacles.png',
       'assets/obstacles/obstacles.json'
+    );
+    this.load.atlas(
+      'ui',
+      'assets/ui/ui.png',
+      'assets/ui/ui.json'
     )
   }
 
@@ -70,10 +78,14 @@ class MainTrack extends Phaser.Scene {
       this.player
     );
 
+    this.hapyness = this.add.existing(
+      new HappyOMeter(this.scene.scene, this.player)
+    ) as HappyOMeter;
+
     this.physics.add.collider(this.player, ground);
     this.physics.add.collider(this.obstacles, ground);
     this.physics.add.overlap(this.player, this.obstacles, (player, cacota) => {
-      console.log('PUM!')
+      this.player.hit()
     }, null, this);
 
     this.anims.create({
@@ -89,6 +101,7 @@ class MainTrack extends Phaser.Scene {
 
   update(time: number, delta: number) {
     this.control.update(time, delta);
+    this.hapyness.update(time, delta);
     if (this.anotherObstacle) {
       this.anotherObstacle = false;
       setTimeout(() => this.anotherObstacle = true, 1000);

@@ -2,14 +2,22 @@ import Arcade = Phaser.Physics.Arcade;
 
 export class Player extends Arcade.Sprite {
 
-  private _jumpDeadline: number;
+  private _blinkEffect: Phaser.Time.TimerEvent;
 
   constructor(scene: Phaser.Scene) {
     super(scene, 0, 0, 'characters');
+    this._blinkEffect = this.scene.time.addEvent({
+      delay: 100,
+      loop: true,
+      repeat: Infinity,
+      callback: this._switchVisibility,
+      callbackScope: this
+    });
+    this._blinkEffect.paused = true;
   }
 
   show(x: number, y: number) {
-    this.anims.play('bea-running');
+    this.anims.play('salva-running');
 
     const collisionBox = { width: 35, height: 25 };
     const body = this.body as Arcade.Body;
@@ -24,6 +32,21 @@ export class Player extends Arcade.Sprite {
 
   jump() {
     this.setVelocityY(-600);
+  }
+
+  hit() {
+    if (this._blinkEffect.paused) {
+      this._blinkEffect.paused = false;
+      this.scene.time.delayedCall(3000, () => {
+        this._blinkEffect.paused = true;
+        this.setVisible(true);
+      }, [], this);
+      this.emit('hit');
+    }
+  }
+
+  private _switchVisibility() {
+    this.setVisible(!this.visible);
   }
 
   static setupAnimations(scene: Phaser.Scene) {
