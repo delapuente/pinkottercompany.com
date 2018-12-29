@@ -11,8 +11,8 @@ export class Control {
   private _jumpDeadline: number;
 
   constructor(cursors: Phaser.Input.Keyboard.CursorKeys, pointer: Phaser.Input.Pointer, player: Player) {
-    this._pointer = pointer;
     this._cursors = cursors;
+    this._pointer = pointer;
     this._player = player;
   }
 

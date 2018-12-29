@@ -85,9 +85,10 @@ class MainTrack extends Phaser.Scene {
       physicalResolution.height / 2
     );
 
+    this.input.addPointer();
     this.control = new Control(
       this.input.keyboard.createCursorKeys(),
-      this.input.addPointer()[0],
+      this.input.pointer1,
       this.player
     );
 
