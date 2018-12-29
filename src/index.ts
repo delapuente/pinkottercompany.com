@@ -2,6 +2,7 @@ import { Player } from './player';
 import { Cacota } from './obstacles';
 import { Control } from './control';
 import { HappyOMeter } from './happy-o-meter';
+import { BgManager } from './backgrounds';
 
 const physicalResolution = {
   width: 800,
@@ -9,6 +10,7 @@ const physicalResolution = {
 };
 
 import Arcade = Phaser.Physics.Arcade;
+import { Layers } from './depths';
 class MainTrack extends Phaser.Scene {
 
   control: Control;
@@ -25,13 +27,15 @@ class MainTrack extends Phaser.Scene {
 
   obstacles: Phaser.Physics.Arcade.Group;
 
+  background: BgManager;
+
   preload() {
     this.load.image('bg', 'assets/environments/background-test.png');
     this.load.image('ground', 'assets/environments/ground-line.png');
     this.load.atlas(
-        'characters',
-        'assets/characters/characters.png',
-        'assets/characters/characters.json'
+      'characters',
+      'assets/characters/characters.png',
+      'assets/characters/characters.json'
     );
     this.load.atlas(
       'obstacles',
@@ -42,6 +46,11 @@ class MainTrack extends Phaser.Scene {
       'ui',
       'assets/ui/ui.png',
       'assets/ui/ui.json'
+    )
+    this.load.atlas(
+      'deco',
+      'assets/environments/deco.png',
+      'assets/environments/deco.json'
     )
   }
 
@@ -60,6 +69,8 @@ class MainTrack extends Phaser.Scene {
     this.groundLine.setOrigin(0, 1);
     this.groundLine.setScale(2, 1);
     this.groundLine.refreshBody();
+    const groundHeight = this.cameras.main.height - this.groundLine.height;
+    this.background = new BgManager(this.scene.scene, groundHeight, Layers.BG_ELEMENTS, Layers.FG);
 
     this.obstacles = this.physics.add.group({
       classType: Cacota,
@@ -68,6 +79,7 @@ class MainTrack extends Phaser.Scene {
     });
 
     this.player = this.add.existing(new Player(this.scene.scene)) as Player;
+    this.player.depth = Layers.PLAYER;
     this.physics.add.existing(this.player);
     this.player.show(
       physicalResolution.width / 4,
@@ -80,7 +92,7 @@ class MainTrack extends Phaser.Scene {
     );
 
     this.hapyness = this.add.existing(
-      new HappyOMeter(this.scene.scene, this.player)
+      new HappyOMeter(this.scene.scene, this.player, Layers.UI)
     ) as HappyOMeter;
 
     this.physics.add.collider(this.player, ground);
@@ -103,6 +115,7 @@ class MainTrack extends Phaser.Scene {
   update(time: number, delta: number) {
     this.control.update(time, delta);
     this.hapyness.update(time, delta);
+    this.background.update();
     if (this.anotherObstacle) {
       this.anotherObstacle = false;
       setTimeout(() => this.anotherObstacle = true, 1000);

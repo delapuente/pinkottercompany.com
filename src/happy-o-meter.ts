@@ -30,14 +30,20 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
   private _face: Phaser.GameObjects.Sprite;
 
-  constructor(scene: Phaser.Scene, player: Player) {
-    super(scene, 'Metter');
+  private _depth: number;
+
+  constructor(scene: Phaser.Scene, player: Player, depth: number) {
+    super(scene, 'metter');
     this._player = player;
+    this._depth = depth;
     this._bubble = this.scene.add.image(0, 0, 'ui', 'Balloon');
+    this._bubble.depth = this._depth;
     this._face = this.scene.add.sprite(0, 0, 'ui');
+    this._face.depth = this._bubble.depth + 1;
     this._hideBubble();
     this._player.on('hit', this._loose, this);
     this._scoreText = this.scene.add.text(0, 0, '');
+    this._scoreText.depth = this._depth;
     this._setupLevel(this._currentLevel);
     this._bar = this.scene.add.graphics();
   }
