@@ -69,8 +69,7 @@ class MainTrack extends Phaser.Scene {
     this.groundLine.setOrigin(0, 1);
     this.groundLine.setScale(2, 1);
     this.groundLine.refreshBody();
-    const groundHeight = this.cameras.main.height - this.groundLine.height;
-    this.background = new BgManager(this.scene.scene, groundHeight, Layers.BG_ELEMENTS, Layers.FG);
+    this.background = new BgManager(this.scene.scene, this.groundLine, Layers.BG_ELEMENTS, Layers.FG);
 
     this.obstacles = this.physics.add.group({
       classType: Cacota,
@@ -120,6 +119,7 @@ class MainTrack extends Phaser.Scene {
       this.anotherObstacle = false;
       setTimeout(() => this.anotherObstacle = true, 1000);
       const cacota = this.obstacles.get();
+      cacota.depth = Layers.OBSTACLES;
       cacota.show(physicalResolution.width, physicalResolution.height/2);
     }
   }

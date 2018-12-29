@@ -10,30 +10,43 @@ function between(min: number, max: number): number {
 }
 
 class Decoration extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene: Phaser.Scene) {
+    super(scene, 0, 0, 'deco');
+    this._disable();
+  }
+
+  _disable() {
+    this.setActive(false);
+    this.setVisible(false);
+  }
+
   update() {
     if (this.body.right < -10) {
-      this.setActive(false);
-      this.setVisible(false);
+      this._disable();
     }
   }
 }
 
 class GrassDecoration extends Decoration {
   constructor(scene: Phaser.Scene) {
-    super(scene, 0, 0, 'deco', 'Grass01.png');
+    super(scene);
     this.setOrigin(0.5, 1);
   }
 
-  show(groundHeight: number) {
+  show(groundHeight: number, depth: number) {
     this.setFrame(oneOf([
       'Grass01.png',
       'Grass02.png',
       'Grass03.png'
     ]));
+    this.depth = depth;
     const body = this.body as Phaser.Physics.Arcade.Body;
-    const mainCamera = this.scene.cameras.main.width;
-    //body.reset(mainCamera + this.width, groundHeight + 2);
-    body.reset(1000, 800);
+    body.setAllowGravity(false);
+    const mainCamera = this.scene.cameras.main;
+    body.reset(
+      between(mainCamera.width + this.width, mainCamera.width * 2),
+      groundHeight
+    );
     this.setVelocityX(-300);
     this.setActive(true);
     this.setVisible(true);
@@ -42,7 +55,7 @@ class GrassDecoration extends Decoration {
 
 class CloudDecoration extends Decoration {
   constructor(scene: Phaser.Scene) {
-    super(scene, 0, 0, 'deco');
+    super(scene);
     this.setOrigin(0.5, 1);
   }
 
@@ -55,18 +68,23 @@ class CloudDecoration extends Decoration {
     ]));
     const body = this.body as Phaser.Physics.Arcade.Body;
     const showHeight = Math.floor(between(this.height, groundHeight));
-    const mainCamera = this.scene.cameras.main.width;
+    const mainCamera = this.scene.cameras.main;
     body.setAllowGravity(false);
-    body.reset(mainCamera + between(this.width, this.width * 1.5), showHeight);
+    body.reset(
+      between(mainCamera.width + this.width, mainCamera.width * 2),
+      showHeight
+    );
     const [v, depthOffset] = oneOf([[10, 0], [100, 1], [300, 2]]);
-    this.setVelocityX(-v);
     this.depth = depth + depthOffset;
+    this.setVelocityX(-between(v * 0.8, v * 1.2));
     this.setActive(true);
     this.setVisible(true);
   }
 }
 
 export class BgManager extends Phaser.GameObjects.GameObject {
+
+  private _ground: Phaser.GameObjects.Sprite;
 
   private _groundHeight: number;
 
@@ -78,9 +96,10 @@ export class BgManager extends Phaser.GameObjects.GameObject {
 
   private _clouds: Phaser.Physics.Arcade.Group;
 
-  constructor(scene: Phaser.Scene, groundHeight: number, bgDepth: number, fgDepth: number) {
+  constructor(scene: Phaser.Scene, ground: Phaser.GameObjects.Sprite, bgDepth: number, fgDepth: number) {
     super(scene, 'bg-manager');
-    this._groundHeight = groundHeight;
+    this._ground = ground;
+    this._groundHeight = this.scene.cameras.main.height - this._ground.height;
     this._bgDepth = bgDepth;
     this._fgDepth = fgDepth;
     this._grass = this.scene.physics.add.group({
@@ -93,12 +112,15 @@ export class BgManager extends Phaser.GameObjects.GameObject {
       maxSize: 10,
       runChildUpdate: true
     });
+    this.scene.physics.add.collider(this._ground, this._grass);
   }
 
   update() {
-    const grass = this._grass.get();
-    if (grass) {
-      grass.show(this._groundHeight, this._fgDepth);
+    if (Math.random() < 0.4) {
+      const grass = this._grass.get();
+      if (grass) {
+        grass.show(this._groundHeight, this._fgDepth);
+      }
     }
 
     const cloud = this._clouds.get();
