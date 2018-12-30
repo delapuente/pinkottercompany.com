@@ -1,0 +1,210 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+h1 {
+  margin-top: 3.5rem;
+  font-size: 7rem;
+  font-weight: 400;
+  font-family: "Just Another Hand", cursive;
+}
+
+body {
+    max-width: 800px;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+#videogame {
+  margin: 2rem 0 2rem 0;
+}
+
+.date-hour {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  min-width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  color: white;
+  font-family: 'Crete Round', serif;
+  background: url(/imgs/rings.png) no-repeat;
+}
+
+.date-hour div {
+  margin: 1.5rem;
+  text-align: center;
+  border: 1px solid white;
+  width: 340px;
+}
+
+.date-hour h2 {
+  font-weight: 1000;
+  background-color: rgb(255,255,255,0.35);
+  padding: 0.5rem;
+}
+
+.date-hour h3 {
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+}
+
+.date-hour hr {
+  margin: 0.75rem;
+  border: none;
+  border-top: 5px dotted white;
+}
+
+.weekday {
+  letter-spacing: 2.85em;
+  font-weight: 600;
+  text-indent: 1.65em;
+}
+
+.day {
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  line-height: 1.5em;
+}
+
+.hour {
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: #f1f1f1;
+  margin-bottom: 0.5rem;
+}
+
+.scheduling-venue {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.scheduling-venue > * {
+  flex: 1 100%;
+}
+
+.bullet {
+  border: 1px solid #808080;
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  display: block;
+  margin: auto;
+}
+
+.scheduling ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.scheduling li {
+  padding: 0 3rem 0.5rem 3rem;
+}
+
+.scheduling a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 1rem;
+}
+
+.scheduling a:hover {
+  font-weight: 800;
+}
+
+.venue {
+  text-align: left;
+  margin: 0 2rem 0 0.1rem;
+  flex: 3 0px;
+}
+
+.aside-place {
+  text-align: left;
+  margin-right: 2rem;
+}
+
+.aside-place img {
+  margin: 1rem 1rem 1.25rem 1rem;
+}
+
+.button {
+  display: block;
+  background-color: #808080;
+  color: white;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.5em 2em;
+  margin: auto;
+  margin-top: 0.5em;
+  border-radius: 2px;
+}
+
+.button:hover {
+  background-color: white;
+  color: #808080;
+  border: 1px solid #808080;
+}
+
+.confirmation-form {
+  margin: auto;
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  padding-top: 2em;
+  padding-bottom: 10em;
+  display: block;
+  z-index: 10;
+  background-color: #e7fbfa;
+  width: 500px;
+  height: auto;
+}
+
+.envelope-back {
+  width: 590px;
+  height: 580px;
+  left: 50%;
+  margin-left: -295px;
+  margin-top: 3em;
+  position: absolute;
+  background-image: url(/imgs/envelopeback.png);
+  background-repeat: no-repeat;
+  z-index: -10;
+}
+
+.envelope-front {
+  width: 590px;
+  height: 350px;
+  left: 50%;
+  margin-left: -295px;
+  margin-top: -44px;
+  text-align: center;
+  background-image: url(/imgs/envelopefront.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 20;
+}
+
+
+@media all and (min-width: 600px) {
+  .article-aside { flex: 1 0 0; }
+}
+
+@media all and (min-width: 750px) {
+  .venue { flex: 3 0px; }
+  .aside-photo { order: 1; }
+  .venue { order: 2; }
+  .aside-place { order: 3; }
+}
