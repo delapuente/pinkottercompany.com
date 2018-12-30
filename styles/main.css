@@ -34,7 +34,7 @@ body {
   justify-content: center;
   color: white;
   font-family: 'Crete Round', serif;
-  background: url(/imgs/rings.png) no-repeat;
+  background: url(../imgs/rings.png) no-repeat;
 }
 
 .date-hour div {
@@ -179,7 +179,7 @@ body {
   margin-left: -295px;
   margin-top: 3em;
   position: absolute;
-  background-image: url(/imgs/envelopeback.png);
+  background-image: url(../imgs/envelopeback.png);
   background-repeat: no-repeat;
   z-index: -10;
 }
@@ -191,7 +191,7 @@ body {
   margin-left: -295px;
   margin-top: -44px;
   text-align: center;
-  background-image: url(/imgs/envelopefront.png);
+  background-image: url(../imgs/envelopefront.png);
   background-repeat: no-repeat;
   position: absolute;
   z-index: 20;
