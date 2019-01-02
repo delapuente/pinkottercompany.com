@@ -127,11 +127,12 @@ class MainTrack extends Phaser.Scene {
   }
 }
 
+const canvas = document.querySelector('canvas');
+
 const config = {
   type: Phaser.AUTO,
   width: physicalResolution.width,
   height: physicalResolution.height,
-  scene: MainTrack,
   pixelArt: true,
   physics: {
     default: 'arcade',
@@ -140,7 +141,24 @@ const config = {
       debug: false
     }
   },
-  canvas: document.querySelector('canvas')
+  canvas
 };
 
 const game = new Phaser.Game(config);
+game.scene.add('main', MainTrack);
+canvas.removeAttribute('style');
+
+function screenSizeCheck() {
+  const isTooSmall = screen.width < physicalResolution.width * 3/4;
+  const tooSmallNotice: HTMLElement = document.querySelector('#gaming-area .notice');
+  tooSmallNotice.hidden = !isTooSmall;
+}
+window.onorientationchange = screenSizeCheck;
+screenSizeCheck();
+
+document.querySelector('#start').addEventListener('click', () => {
+  const gameCover: HTMLElement = document.querySelector('#gaming-area .cover');
+  gameCover.hidden = true;
+  canvas.requestFullscreen();
+  game.scene.start('main');
+});

@@ -21,8 +21,24 @@ body {
     text-align: center;
 }
 
-#videogame {
-  margin: 2rem 0 2rem 0;
+#gaming-area {
+  position: relative;
+}
+
+#gaming-area .cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: aquamarine;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#game {
+  width: 100%;
 }
 
 .date-hour {
@@ -195,6 +211,10 @@ body {
   background-repeat: no-repeat;
   position: absolute;
   z-index: 20;
+}
+
+.photo-mosaic img {
+  max-width: 100%;
 }
 
 
