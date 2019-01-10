@@ -1,16 +1,16 @@
 import Arcade = Phaser.Physics.Arcade;
 
-type partners = 'bea' | 'salva';
+export type partners = 'bea' | 'salva';
 
 export class Player extends Arcade.Sprite {
 
   private _blinkEffect: Phaser.Time.TimerEvent;
 
-  private _who: partners;
+  readonly name: partners;
 
-  constructor(scene: Phaser.Scene, who: partners) {
+  constructor(scene: Phaser.Scene, name: partners) {
     super(scene, 0, 0, 'characters');
-    this._who = who;
+    this.name = name;
     this._blinkEffect = this.scene.time.addEvent({
       delay: 100,
       loop: true,
@@ -23,13 +23,13 @@ export class Player extends Arcade.Sprite {
 
   showIdle(x: number, y: number) {
     this.setPosition(x, y);
-    this.anims.play(`${this._who}-idle`);
+    this.anims.play(`${this.name}-idle`);
     this.setVisible(true);
     this.setActive(true);
   }
 
   showRunning(x: number, y: number) {
-    this.anims.play(`${this._who}-running`);
+    this.anims.play(`${this.name}-running`);
 
     const collisionBox = { width: 35, height: 25 };
     const body = this.body as Arcade.Body;

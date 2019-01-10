@@ -1,4 +1,4 @@
-import { Player } from './player';
+import { Player, partners } from './player';
 import { Cacota } from './obstacles';
 import { Control } from './control';
 import { HappyOMeter } from './happy-o-meter';
@@ -49,7 +49,8 @@ export class MainTrack extends Phaser.Scene {
     );
   }
 
-  create() {
+  create({ playerName }: { playerName: partners }) {
+
     Player.setupAnimations(this);
     Cacota.setupAnimations(this);
     HappyOMeter.setupAnimations(this);
@@ -72,7 +73,7 @@ export class MainTrack extends Phaser.Scene {
       runChildUpdate: true
     });
 
-    this.player = this.add.existing(new Player(this.scene.scene, 'bea')) as Player;
+    this.player = this.add.existing(new Player(this.scene.scene, playerName)) as Player;
     this.player.depth = Layers.PLAYER;
     this.physics.add.existing(this.player);
     this.player.showRunning(
@@ -80,10 +81,9 @@ export class MainTrack extends Phaser.Scene {
       physicalResolution.height / 2
     );
 
-    this.input.addPointer();
     this.control = new Control(
       this.input.keyboard.createCursorKeys(),
-      this.input.pointer1,
+      this.input.activePointer,
       this.player
     );
 

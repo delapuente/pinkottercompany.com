@@ -70,7 +70,8 @@ export class PlayerSelection extends Phaser.Scene {
     startText.on('pointerdown', () => {
       this.scene.transition({
         target: 'main',
-        duration: 1000
+        duration: 1000,
+        data: { playerName: this._selected.name }
       });
     });
 
@@ -81,10 +82,7 @@ export class PlayerSelection extends Phaser.Scene {
     this.input.keyboard.on('keydown_RIGHT', () => {
       this._select('right');
     });
-    this.events.on('destroy', () => {
-      console.log('muerteeeeee');
-      this.input.keyboard.destroy();
-    });
+    // TODO: Quitar los listeners a la que elegimos un jugador.
   }
 
   _centerText(
