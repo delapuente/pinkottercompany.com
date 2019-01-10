@@ -44,11 +44,11 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     this._player.on('hit', this._loose, this);
     this._scoreText = this.scene.add.text(0, 0, '');
     this._scoreText.depth = this._depth;
-    this._setupLevel(this._currentLevel);
+    this._setupState(this._currentLevel);
     this._bar = this.scene.add.graphics();
   }
 
-  _setupLevel(level: number) {
+  _setupState(level: number) {
     // Set label and center text
     const width = this.scene.cameras.main.width;
     const height = this.scene.cameras.main.height;
@@ -73,14 +73,14 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
   _levelDown() {
     if (this._currentLevel > 0) {
       this._currentLevel--;
-      this._setupLevel(this._currentLevel);
+      this._setupState(this._currentLevel);
     }
   }
 
   _levelUp() {
     if (this._currentLevel < states.length - 1) {
       this._currentLevel++;
-      this._setupLevel(this._currentLevel);
+      this._setupState(this._currentLevel);
       this._showBubble(Bubbles.Happy, 3000);
     }
   }

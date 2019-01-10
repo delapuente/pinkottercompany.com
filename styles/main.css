@@ -21,6 +21,10 @@ body {
     text-align: center;
 }
 
+*[hidden] {
+  visibility: hidden;
+}
+
 #gaming-area {
   position: relative;
 }
