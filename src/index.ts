@@ -22,7 +22,6 @@ const config = {
 const game = new Phaser.Game(config);
 game.scene.add('player-selection', PlayerSelection);
 game.scene.add('main', MainTrack);
-game.scene.start('player-selection');
 canvas.removeAttribute('style');
 
 function screenSizeCheck() {
@@ -37,5 +36,5 @@ document.querySelector('#start').addEventListener('click', () => {
   const gameCover: HTMLElement = document.querySelector('#gaming-area .cover');
   gameCover.hidden = true;
   canvas.requestFullscreen();
-  //game.scene.start('player-selection');
+  game.scene.start('player-selection');
 });
