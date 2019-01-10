@@ -33,7 +33,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: aquamarine;
+  background-color: black;
   position: absolute;
   top: 0;
   right: 0;
@@ -45,6 +45,22 @@ body {
   width: 100%;
 }
 
+#start {
+  width: 125px;
+  height: 30px;
+  margin: auto;
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  background: transparent;
+  background-image: url(../imgs/ButtonShort.png);
+  background-size: cover;
+  background-position: center;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+
 .date-hour {
   display: flex;
   flex-flow: row wrap;
@@ -54,7 +70,7 @@ body {
   justify-content: center;
   color: white;
   font-family: 'Crete Round', serif;
-  background: url(../imgs/rings.png) no-repeat;
+  background: url(../imgs/backtest.png) no-repeat;
 }
 
 .date-hour div {
