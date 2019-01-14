@@ -7,8 +7,16 @@ html {
   font-family: "Roboto Condensed", sans-serif;
 }
 
+header > * {
+  display: inline-block;
+}
+
+header div img {
+  margin: 0 0.5rem;
+}
+
 h1 {
-  margin-top: 3.5rem;
+  margin: 3.5rem 3rem 0;
   font-size: 7rem;
   font-weight: 400;
   font-family: "Just Another Hand", cursive;
@@ -104,6 +112,11 @@ body {
   margin: 0.75rem;
   border: none;
   border-top: 5px dotted white;
+}
+
+.date-hour img {
+  margin-right: 35px;
+  margin-left: auto;
 }
 
 .weekday {
@@ -244,6 +257,11 @@ body {
 
 .photo-mosaic img {
   max-width: 100%;
+}
+
+.presents {
+  display: inline-block;
+  margin: 2rem 0;
 }
 
 
