@@ -95,11 +95,12 @@ body {
   text-align: center;
   border: 1px solid white;
   width: 340px;
+  background-color: rgba(33, 217, 204, 0.4);
 }
 
 .date-hour h2 {
   font-weight: 1000;
-  background-color: rgb(255,255,255,0.35);
+  background-color: rgb(255,255,255,0.5);
   padding: 0.5rem;
 }
 
@@ -223,45 +224,18 @@ body {
   margin-bottom: 2em;
   padding-top: 2em;
   padding-bottom: 10em;
-  display: block;
-  z-index: 10;
-  background-color: #e7fbfa;
-  width: 500px;
-  height: auto;
-}
-
-.envelope-back {
-  width: 590px;
-  height: 580px;
-  left: 50%;
-  margin-left: -295px;
-  margin-top: 3em;
-  position: absolute;
-  background-image: url(../imgs/envelopeback.png);
-  background-repeat: no-repeat;
-  z-index: -10;
-}
-
-.envelope-front {
-  width: 590px;
-  height: 350px;
-  left: 50%;
-  margin-left: -295px;
-  margin-top: -44px;
-  text-align: center;
-  background-image: url(../imgs/envelopefront.png);
-  background-repeat: no-repeat;
-  position: absolute;
-  z-index: 20;
 }
 
 .photo-mosaic img {
   max-width: 100%;
 }
 
-.presents {
-  display: inline-block;
+.info-details {
   margin: 2rem 0;
+}
+
+.info-details h2 {
+  margin: 1rem 0 0.5rem;
 }
 
 
