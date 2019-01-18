@@ -64,6 +64,10 @@ export class PlayerSelection extends Phaser.Scene {
     const explanationText = this.add.text(0, 0, 'En el juego, evita las cacotas pulsando espacio o tocando la pantalla.');
     this._centerText(explanationText, cX, belowLine);
 
+    // It is not the button which is interactive but the text itself.
+    const startButton = this.add.group();
+    startButton.add(this.add.image(cX, buttonLine, 'ui', 'ButtonLong.png'));
+
     const startText = this.add.text(0, 0, '¡Vamos allá!');
     this._centerText(startText, cX, buttonLine);
     startText.setInteractive();
