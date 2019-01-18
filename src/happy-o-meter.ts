@@ -26,9 +26,7 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
   private _player: Player;
 
-  private _bubble: Phaser.GameObjects.Image;
-
-  private _face: Phaser.GameObjects.Sprite;
+  private _bubble: Phaser.GameObjects.Sprite;
 
   private _depth: number;
 
@@ -36,10 +34,8 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     super(scene, 'metter');
     this._player = player;
     this._depth = depth;
-    this._bubble = this.scene.add.image(0, 0, 'ui', 'Balloon');
+    this._bubble = this.scene.add.sprite(0, 0, 'ui');
     this._bubble.depth = this._depth;
-    this._face = this.scene.add.sprite(0, 0, 'ui');
-    this._face.depth = this._bubble.depth + 1;
     this._hideBubble();
     this._player.on('hit', this._loose, this);
     this._scoreText = this.scene.add.text(0, 0, '');
@@ -87,8 +83,7 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
   _showBubble(bubbleType: Bubbles, time: number) {
     this._bubble.setVisible(true);
-    this._face.setVisible(true);
-    this._face.anims.play(bubbleType == Bubbles.Happy ? 'level-up' : 'level-down');
+    this._bubble.anims.play(bubbleType == Bubbles.Happy ? 'level-up' : 'level-down');
     this.scene.time.delayedCall(time, () => {
       this._hideBubble();
     }, [], this);
@@ -96,7 +91,6 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
   _hideBubble() {
     this._bubble.setVisible(false);
-    this._face.setVisible(false);
   }
 
   update(time: number, delta: number) {
@@ -120,12 +114,7 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
       start + start * this._progress, height
     );
 
-    // Position bubble over the character.
     this._bubble.setPosition(
-      this._player.x + 15,
-      this._player.y - this._player.height + 5
-    );
-    this._face.setPosition(
       this._player.x + 15,
       this._player.y - this._player.height - 2
     );
