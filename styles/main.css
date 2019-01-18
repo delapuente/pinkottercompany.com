@@ -39,6 +39,7 @@ body {
 }
 
 #gaming-area .cover {
+  line-height: initial;
   display: flex;
   flex-direction: column;
   justify-content: center;

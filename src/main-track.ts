@@ -24,6 +24,8 @@ export class MainTrack extends Phaser.Scene {
 
   background: BgManager;
 
+  private _backButton: Phaser.GameObjects.Image;
+
   preload() {
     this.load.image('bg', 'assets/environments/background-test.png');
     this.load.image('ground', 'assets/environments/ground-line.png');
@@ -86,6 +88,22 @@ export class MainTrack extends Phaser.Scene {
       this.input.activePointer,
       this.player
     );
+
+    this._backButton = this.add.image(5, 5, 'ui', 'BackArrow.png');
+    this._backButton.depth = Layers.UI;
+    this._backButton.setOrigin(0, 0);
+    this._backButton.setInteractive();
+    this._backButton.on('pointerdown', () => {
+      const isFullscreen = document.fullscreen;
+      if (isFullscreen) {
+        document.exitFullscreen();
+      }
+      else {
+        this.scene.transition({
+          target: 'player-selection'
+        });
+      }
+    });
 
     this.hapyness = this.add.existing(
       new HappyOMeter(this.scene.scene, this.player, Layers.UI)
