@@ -22,6 +22,8 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
   private _currentLevel: integer = 1;
 
+  private _scoreFaces: Phaser.GameObjects.Image;
+
   private _scoreText: Phaser.GameObjects.Text;
 
   private _player: Player;
@@ -38,6 +40,8 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     this._bubble.depth = this._depth;
     this._hideBubble();
     this._player.on('hit', this._loose, this);
+    this._scoreFaces = this.scene.add.image(0, 0, 'ui', 'ScoreFaces.png');
+    this._scoreFaces.setOrigin(0, 0);
     this._scoreText = this.scene.add.text(0, 0, '');
     this._scoreText.depth = this._depth;
     this._setupState(this._currentLevel);
@@ -50,8 +54,13 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     const height = this.scene.cameras.main.height;
     this._scoreText.setText(states[level]);
     const textWidth = this._scoreText.width;
-    this._scoreText.x = (width - textWidth) / 2;
-    this._scoreText.y = height - 45;
+    const facesWidth = this._scoreFaces.width;
+    const separation = 20;
+    const totalWidth = facesWidth + separation + textWidth;
+    this._scoreFaces.x = (width - totalWidth) / 2;
+    this._scoreFaces.y = height - 45;
+    this._scoreText.x = this._scoreFaces.x + facesWidth + separation;
+    this._scoreText.y = this._scoreFaces.y;
 
     // Reset progress
     this._progress = 0;
@@ -108,7 +117,9 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     // Make the progress bar to grow.
     const start = this.scene.cameras.main.width / 3;
     const height = this.scene.cameras.main.height - 15;
-    this._bar.lineStyle(5, 0xffffff, 1);
+    const isMaxLevel = this._progress == 1 && this._currentLevel == states.length - 1;
+    const color =  isMaxLevel ? 0xfbaec7 : 0xffffff;
+    this._bar.lineStyle(5, color, 1);
     this._bar.lineBetween(
       start, height,
       start + start * this._progress, height
