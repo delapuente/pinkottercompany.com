@@ -74,7 +74,6 @@ export class PlayerSelection extends Phaser.Scene {
     startText.on('pointerdown', () => {
       this.scene.transition({
         target: 'main',
-        duration: 1000,
         data: { playerName: this._selected.name }
       });
     });

@@ -1,3 +1,5 @@
+import * as isMobile from 'ismobilejs';
+
 import { MainTrack } from './main-track';
 import { PlayerSelection } from './player-selection';
 import { physicalResolution } from './size';
@@ -35,6 +37,8 @@ screenSizeCheck();
 document.querySelector('#start').addEventListener('click', () => {
   const gameCover: HTMLElement = document.querySelector('#gaming-area .cover');
   gameCover.hidden = true;
-  canvas.requestFullscreen();
+  if (isMobile.any) {
+    canvas.requestFullscreen();
+  }
   game.scene.start('player-selection');
 });
