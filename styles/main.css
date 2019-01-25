@@ -27,10 +27,12 @@ body {
     display: block;
     margin: auto;
     text-align: center;
-    background-image: url(../imgs/backgroundmadrid.svg);
+    background-image: url(../imgs/backgroundmadrid.svg),
+    linear-gradient(#ffffff, #f2f9f8),
+    url(../imgs/backgroundsky.svg);
     background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 101%;
+    background-position: center bottom, center, center;
+    background-size: 101%, 900px auto, cover;
 }
 
 *[hidden] {
