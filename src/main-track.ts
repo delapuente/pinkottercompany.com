@@ -167,7 +167,7 @@ export class MainTrack extends Phaser.Scene {
       otherPlayer.scaleX = -1;
 
       // Stop grass in the background
-      this.background.stopGrass();
+      this.background.stop();
     })
   }
 

@@ -24,7 +24,6 @@ const config = {
 const game = new Phaser.Game(config);
 game.scene.add('player-selection', PlayerSelection);
 game.scene.add('main', MainTrack);
-game.scene.start('main', { playerName: 'salva' });
 canvas.removeAttribute('style');
 
 function screenSizeCheck() {

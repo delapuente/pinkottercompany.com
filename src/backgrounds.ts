@@ -98,6 +98,8 @@ export class BgManager extends Phaser.GameObjects.GameObject {
 
   private _clouds: Phaser.Physics.Arcade.Group;
 
+  private _cloudsEnabled: boolean = true;
+
   constructor(scene: Phaser.Scene, ground: Phaser.GameObjects.Sprite, bgDepth: number, fgDepth: number) {
     super(scene, 'bg-manager');
     this._ground = ground;
@@ -117,9 +119,13 @@ export class BgManager extends Phaser.GameObjects.GameObject {
     this.scene.physics.add.collider(this._ground, this._grass);
   }
 
-  stopGrass() {
+  stop() {
     this._grassEnabled = false;
+    this._cloudsEnabled = false;
     this._grass.setVelocity(0, 0);
+    this._clouds.children.each((child: CloudDecoration) => {
+      child.setVelocityX(child.body.velocity.x / 10);
+    }, this);
   }
 
   update() {
@@ -130,9 +136,11 @@ export class BgManager extends Phaser.GameObjects.GameObject {
       }
     }
 
-    const cloud = this._clouds.get();
-    if (cloud) {
-      cloud.show(this._groundHeight / 6 * 5, this._bgDepth);
+    if (this._cloudsEnabled) {
+      const cloud = this._clouds.get();
+      if (cloud) {
+        cloud.show(this._groundHeight / 6 * 5, this._bgDepth);
+      }
     }
   }
 }
