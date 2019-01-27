@@ -94,6 +94,8 @@ export class BgManager extends Phaser.GameObjects.GameObject {
 
   private _grass: Phaser.Physics.Arcade.Group;
 
+  private _grassEnabled: boolean = true;
+
   private _clouds: Phaser.Physics.Arcade.Group;
 
   constructor(scene: Phaser.Scene, ground: Phaser.GameObjects.Sprite, bgDepth: number, fgDepth: number) {
@@ -115,8 +117,13 @@ export class BgManager extends Phaser.GameObjects.GameObject {
     this.scene.physics.add.collider(this._ground, this._grass);
   }
 
+  stopGrass() {
+    this._grassEnabled = false;
+    this._grass.setVelocity(0, 0);
+  }
+
   update() {
-    if (Math.random() < 0.4) {
+    if (this._grassEnabled && Math.random() < 0.4) {
       const grass = this._grass.get();
       if (grass) {
         grass.show(this._groundHeight, this._fgDepth);

@@ -1,7 +1,7 @@
 import { Player, partners } from './player';
 import { Cacota } from './obstacles';
 import { Control } from './control';
-import { HappyOMeter } from './happy-o-meter';
+import { HappyOMeter, Rings } from './ui';
 import { BgManager } from './backgrounds';
 import { Layers } from './depths';
 import { physicalResolution } from './size';
@@ -12,6 +12,8 @@ export class MainTrack extends Phaser.Scene {
 
   hapyness: HappyOMeter;
 
+  rings: Rings;
+
   player: Player;
 
   groundLine: Phaser.Physics.Arcade.Sprite;
@@ -19,6 +21,8 @@ export class MainTrack extends Phaser.Scene {
   jumpDeadline: number;
 
   anotherObstacle: boolean = true;
+
+  throwObstacles: boolean = true;
 
   obstacles: Phaser.Physics.Arcade.Group;
 
@@ -53,9 +57,12 @@ export class MainTrack extends Phaser.Scene {
 
   create({ playerName }: { playerName: partners }) {
 
-    Player.setupAnimations(this);
-    Cacota.setupAnimations(this);
-    HappyOMeter.setupAnimations(this);
+    [
+      Player,
+      Cacota,
+      HappyOMeter,
+      Rings
+    ].forEach(klass => klass.setupAnimations(this));
 
     const bg = this.add.image(0, 0, 'bg').setOrigin(0, 0);
 
@@ -83,11 +90,46 @@ export class MainTrack extends Phaser.Scene {
       physicalResolution.height / 2
     );
 
+    this.rings = this.add.existing(new Rings(this.scene.scene)) as Rings;
+    this.physics.add.existing(this.rings);
+    this.rings.depth = Layers.UI + 2;
+
     this.control = new Control(
       this.input.keyboard.createCursorKeys(),
       this.input.activePointer,
       this.player
     );
+
+    // Quick win trigger
+    this.input.keyboard.once('keydown_F', () => {
+      this.throwObstacles = false;
+      this.hapyness.hide();
+      this.player.setAccelerationX(150);
+      this.player.setCollideWorldBounds(false);
+      this.rings.show();
+      this.rings.events.once('shown', () => {
+        // Flash
+        this.cameras.main.flash(1000, 0xffffff);
+        
+        // Create the other player
+        const quarterX = this.cameras.main.width / 4;
+        const middleY = this.cameras.main.height / 2;
+        const otherPlayerName = this.player.name == 'bea' ? 'salva': 'bea';
+        const otherPlayer = new Player(this.scene.scene, otherPlayerName);
+        otherPlayer.depth = Layers.PLAYER;
+        this.physics.add.collider(this.groundLine, otherPlayer);
+        this.add.existing(otherPlayer);
+        this.physics.add.existing(otherPlayer);
+
+        // Show both players
+        this.player.showWinning(quarterX, middleY);
+        otherPlayer.showWinning(3 * quarterX, middleY);
+        otherPlayer.scaleX = -1;
+
+        // Stop grass in the background
+        this.background.stopGrass();
+      });
+    })
 
     this._backButton = this.add.image(5, 5, 'ui', 'BackArrow.png');
     this._backButton.depth = Layers.UI;
@@ -130,7 +172,8 @@ export class MainTrack extends Phaser.Scene {
     this.control.update(time, delta);
     this.hapyness.update(time, delta);
     this.background.update();
-    if (this.anotherObstacle) {
+    this.rings.update();
+    if (this.throwObstacles && this.anotherObstacle) {
       this.anotherObstacle = false;
       setTimeout(() => this.anotherObstacle = true, 1000);
       const cacota = this.obstacles.get();

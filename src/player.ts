@@ -42,6 +42,13 @@ export class Player extends Arcade.Sprite {
     this.setActive(true);
   }
 
+  showWinning(x: number, y: number) {
+    this.body.reset(x, y);
+    this.anims.play(`${this.name}-win`);
+    this.setVisible(true);
+    this.setActive(true);
+  }
+
   jump() {
     this.setVelocityY(-600);
   }

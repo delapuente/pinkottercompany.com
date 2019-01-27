@@ -1,5 +1,6 @@
 import { Player } from './player';
-import { NONE } from 'phaser';
+
+import Arcade = Phaser.Physics.Arcade;
 
 const states: Array<string> = [
   'tienen baches',
@@ -46,6 +47,12 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     this._scoreText.depth = this._depth;
     this._setupState(this._currentLevel);
     this._bar = this.scene.add.graphics();
+  }
+
+  hide() {
+    this._scoreFaces.setVisible(false);
+    this._scoreText.setVisible(false);
+    this._bar.setVisible(false);
   }
 
   _setupState(level: number) {
@@ -153,4 +160,52 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
     });
   }
 
+}
+
+export class Rings extends Arcade.Sprite {
+
+  private _middleX: number;
+
+  private _middleY: number;
+
+  events: Phaser.Events.EventEmitter;
+
+  constructor(scene: Phaser.Scene) {
+    super(scene, 0, 0, 'ui');
+    this.events = new Phaser.Events.EventEmitter();
+    this.setOrigin(0.5, 0);
+    this.setVisible(false);
+  }
+
+  show() {
+    this._middleX = this.scene.cameras.main.width / 2;
+    this._middleY = this.scene.cameras.main.height / 2;
+    const bottom = this._middleY * 2;
+    const body = this.body as Arcade.Body;
+    body.setAllowGravity(false);
+    body.reset(this._middleX, bottom + 50);
+    this.play('spinning');
+    this.setVelocityY(-20)
+    this.setVisible(true);
+  }
+
+  update() {
+    if (this.y < this._middleY) {
+      this.setVelocityY(0);
+      this.events.emit('shown');
+    }
+  }
+
+  static setupAnimations(scene: Phaser.Scene) {
+    const anims = scene.anims;
+    anims.create({
+      key: 'spinning',
+      frames: anims.generateFrameNames(
+        'ui',
+        { prefix: 'Rings', zeroPad: 2, start: 1, end: 8, suffix: '.png' }
+      ),
+      frameRate: 7,
+      repeat: Infinity
+    });
+  }
 }
