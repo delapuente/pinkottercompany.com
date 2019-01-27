@@ -30,6 +30,8 @@ export class MainTrack extends Phaser.Scene {
 
   private _backButton: Phaser.GameObjects.Image;
 
+  private _won: boolean = false;
+
   preload() {
     this.load.image('bg', 'assets/environments/background-test.png');
     this.load.image('ground', 'assets/environments/ground-line.png');
@@ -142,6 +144,8 @@ export class MainTrack extends Phaser.Scene {
   }
 
   winningSequence() {
+    if (this._won) { return; }
+
     this.throwObstacles = false;
     this.hapyness.hide();
     this.player.setAccelerationX(150);
@@ -168,7 +172,9 @@ export class MainTrack extends Phaser.Scene {
 
       // Stop grass in the background
       this.background.stop();
-    })
+    });
+
+    this._won = true;
   }
 
   update(time: number, delta: number) {
