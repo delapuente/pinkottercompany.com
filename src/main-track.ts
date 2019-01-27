@@ -100,37 +100,6 @@ export class MainTrack extends Phaser.Scene {
       this.player
     );
 
-    // Quick win trigger
-    this.input.keyboard.once('keydown_F', () => {
-      this.throwObstacles = false;
-      this.hapyness.hide();
-      this.player.setAccelerationX(150);
-      this.player.setCollideWorldBounds(false);
-      this.rings.show();
-      this.rings.events.once('shown', () => {
-        // Flash
-        this.cameras.main.flash(1000, 0xffffff);
-        
-        // Create the other player
-        const quarterX = this.cameras.main.width / 4;
-        const middleY = this.cameras.main.height / 2;
-        const otherPlayerName = this.player.name == 'bea' ? 'salva': 'bea';
-        const otherPlayer = new Player(this.scene.scene, otherPlayerName);
-        otherPlayer.depth = Layers.PLAYER;
-        this.physics.add.collider(this.groundLine, otherPlayer);
-        this.add.existing(otherPlayer);
-        this.physics.add.existing(otherPlayer);
-
-        // Show both players
-        this.player.showWinning(quarterX, middleY);
-        otherPlayer.showWinning(3 * quarterX, middleY);
-        otherPlayer.scaleX = -1;
-
-        // Stop grass in the background
-        this.background.stopGrass();
-      });
-    })
-
     this._backButton = this.add.image(5, 5, 'ui', 'BackArrow.png');
     this._backButton.depth = Layers.UI;
     this._backButton.setOrigin(0, 0);
@@ -151,6 +120,10 @@ export class MainTrack extends Phaser.Scene {
       new HappyOMeter(this.scene.scene, this.player, Layers.UI)
     ) as HappyOMeter;
 
+    // Quick win trigger
+    this.input.keyboard.once('keydown_F', this.winningSequence, this);
+    this.hapyness.events.once('top', this.winningSequence, this);
+
     this.physics.add.collider(this.player, ground);
     this.physics.add.collider(this.obstacles, ground);
     this.physics.add.overlap(this.player, this.obstacles, (player, cacota) => {
@@ -166,6 +139,36 @@ export class MainTrack extends Phaser.Scene {
       frameRate: 3,
       repeat: 1
     });
+  }
+
+  winningSequence() {
+    this.throwObstacles = false;
+    this.hapyness.hide();
+    this.player.setAccelerationX(150);
+    this.player.setCollideWorldBounds(false);
+    this.rings.show();
+    this.rings.events.once('shown', () => {
+      // Flash
+      this.cameras.main.flash(1000, 0xffffff);
+      
+      // Create the other player
+      const quarterX = this.cameras.main.width / 4;
+      const middleY = this.cameras.main.height / 2;
+      const otherPlayerName = this.player.name == 'bea' ? 'salva': 'bea';
+      const otherPlayer = new Player(this.scene.scene, otherPlayerName);
+      otherPlayer.depth = Layers.PLAYER;
+      this.physics.add.collider(this.groundLine, otherPlayer);
+      this.add.existing(otherPlayer);
+      this.physics.add.existing(otherPlayer);
+
+      // Show both players
+      this.player.showWinning(quarterX, middleY);
+      otherPlayer.showWinning(3 * quarterX, middleY);
+      otherPlayer.scaleX = -1;
+
+      // Stop grass in the background
+      this.background.stopGrass();
+    })
   }
 
   update(time: number, delta: number) {

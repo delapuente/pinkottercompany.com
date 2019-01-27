@@ -17,6 +17,8 @@ enum Bubbles {
 
 export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
+  events: Phaser.Events.EventEmitter;
+
   private _bar: Phaser.GameObjects.Graphics;
 
   private _progress: number = 0;
@@ -35,6 +37,7 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
 
   constructor(scene: Phaser.Scene, player: Player, depth: number) {
     super(scene, 'metter');
+    this.events = new Phaser.Events.EventEmitter();
     this._player = player;
     this._depth = depth;
     this._bubble = this.scene.add.sprite(0, 0, 'ui');
@@ -118,6 +121,7 @@ export class HappyOMeter extends Phaser.GameObjects.GameObject {
       }
       else {
         this._progress = 1;
+        this.events.emit('top');
       }
     }
 
