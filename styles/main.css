@@ -124,7 +124,8 @@ body {
   border-top: 5px dotted white;
 }
 
-.date-hour img {
+.otter-deco {
+  margin-top: auto;
   margin-right: 35px;
   margin-left: auto;
   width: 120px;
