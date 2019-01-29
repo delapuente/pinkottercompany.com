@@ -183,7 +183,7 @@ body {
 }
 
 .scheduling li {
-  padding: 0 3rem 0.5rem 3rem;
+  padding: 0 1rem 0.5rem 1rem;
 }
 
 .scheduling a {
@@ -200,35 +200,68 @@ body {
 .venue {
   text-align: left;
   margin: 0 2rem 0 0.1rem;
+  padding-left: 1.5rem;
   flex: 3 0px;
+  padding-bottom: 1.5rem;
+}
+
+.venue h2 {
+  margin-bottom: 1rem;
+}
+
+.venue p {
+  padding-bottom: 1.5rem;
+}
+
+.label-family {
+  display: inline-block;
+  background-image: url(../imgs/labelblue.png);
+  background-repeat: no-repeat;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  width: 125px;
+  height: 30px;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.times {
+  color: #808080;
+  padding-bottom: 1.5rem;
 }
 
 .aside-place {
   text-align: left;
   margin-right: 2rem;
+  padding-left: 1.5rem;
+}
+.link {
+  text-decoration: none;
+  color: #808080;
 }
 
-.aside-place img {
-  margin: 1rem 1rem 1.25rem 1rem;
+.aside-place iframe {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .button {
-  display: block;
-  background-color: #808080;
+  display: inline-block;
+  background-image: url(../imgs/buttonlong.png);
+  background-repeat: no-repeat;
   color: white;
-  width: 150px;
+  width: 272px;
+  height: 35px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.75rem;
   text-align: center;
   text-decoration: none;
-  padding: 0.5em 2em;
   margin: auto;
   margin-top: 0.5em;
-  border-radius: 2px;
-}
-
-.button:hover {
-  background-color: white;
-  color: #808080;
-  border: 1px solid #808080;
+  padding-top: 0.5rem;
 }
 
 .photo-mosaic img {
