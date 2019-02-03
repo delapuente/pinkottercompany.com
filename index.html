@@ -3,16 +3,17 @@
     <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width,initial-scale=1.0">
       <meta name="author" content="Pink Otter Company">
       <meta name="description" content="Bea and Salva Wedding Website">
-      <title>Boda de Bea y Salva</title>
+      <title>La boda de Bea y Salva</title>
       <link href="https://fonts.googleapis.com/css?family=Just+Another+Hand|Crete+Round|Roboto+Condensed|Press+Start+2P" rel="stylesheet">
       <link rel="stylesheet" href="styles/main.css" media="screen">
       <script defer src="lib/phaser.js"></script>
       <script defer src="dist/bundle.js"></script>
     </head>
     <body>
+      <img class="otter-deco above" src="imgs/otterbig.png">
+      <img class="otter-deco" src="imgs/otterbig.png">
       <section class="arcade">
         <header>
           <img src="imgs/header.jpg" />
@@ -25,27 +26,33 @@
           </section>
           <canvas id="game"></canvas>
         </section>
-        <section class="control">
-          <img src="imgs/controlPanel.jpg" />
-        </section>
+        <section class="separator"></section>
         <section class="scheduling">
-          <section class="appointment">
+          <section class="card">
             <h2>Para la familia</h2>
-            <p class="place">MADRID</p>
+            <p class="place">Hotel Emperador</p>
             <p class="weekday">SÁBADO</p>
             <p class="day">30 DE MARZO</p>
             <hr/>
             <p class="hour">12:00 h</p>
           </section>
-          <section class="appointment">
+          <section class="card">
             <h2>Para los amigos</h2>
-            <p class="place">MADRID</p>
+            <p class="place">Hotel Emperador</p>
             <p class="weekday">SÁBADO</p>
             <p class="day">30 DE MARZO</p>
             <hr/>
             <p class="hour">18:00 h</p>
           </section>
-          <img class="otter-deco" src="imgs/otterbig.png">
+          <section class="card venue">
+            <h2>En el Hotel Emperador</h2>
+            <p>Calle Gran Vía, 53, 28013 Madrid</p>
+            <p>Más información en su <a href="https://www.emperadorhotel.com/es/" rel="noopener" target="__blank">sitio web</a>.</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.433262822962!2d-3.7103162846039215!3d40.421404179364565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcf29d0a106fe8a5!2sHotel+Emperador!5e0!3m2!1sen!2ses!4v1549237749986" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+          </section>
+        </section>
+        <section class="photo-mosaic">
+          <img src="imgs/PhotoMosaic.png">
         </section>
       </section>
       <!--
@@ -86,9 +93,6 @@
         </aside>
       </section>
       -->
-      <section class="photo-mosaic">
-        <img src="imgs/PhotoMosaic.png">
-      </section>
       <section>
         <section class="info-details" data-aos="fade">
           <div>

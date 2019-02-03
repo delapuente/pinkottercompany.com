@@ -23,8 +23,9 @@ body {
   width: calc(100% - 5rem);
   margin: 1rem auto;
   border: 1.5em solid black;
-  border-bottom: none;
+  border-bottom: 1.5rem solid black;
   border-radius: 10px;
+  background: black;
 }
 
 .arcade::after {
@@ -35,7 +36,7 @@ body {
   left: -1.7em;
   right: -1.7em;
   bottom: 0;
-  background: #26d01d;
+  background: #1d87aa;
   border-radius: 10px;
 }
 
@@ -51,13 +52,10 @@ header img {
 	height: auto;
 }
 
-.control {
+.separator {
   display: flex;
-}
-
-.control img {
-  width: 100%;
-  height: auto;
+  background: linear-gradient(#333,#DDD);
+  height: 1.5rem;
 }
 
 h1 {
@@ -135,7 +133,7 @@ h1 {
   background-repeat: no-repeat, repeat;
 }
 
-.appointment {
+.card {
   margin: 1rem 0;
   text-align: center;
   border: 1px solid white;
@@ -143,14 +141,26 @@ h1 {
   background-color: rgba(43, 187, 204, 0.85);
 }
 
-.appointment h2 {
+.venue {
+  line-height: 0;
+}
+
+.venue > * {
+  line-height: normal;
+}
+
+.venue iframe {
+  margin-top: 0.5rem;
+}
+
+.card h2 {
   background-color: rgba(25, 130, 170, 0.88);
   padding: 0.5rem;
   font-weight: normal;
   margin-bottom: 0.5rem;
 }
 
-.appointment hr {
+.card hr {
   margin: 0.75rem;
   border: none;
   border-top: 5px dotted white;
@@ -182,11 +192,18 @@ h1 {
 }
 
 .otter-deco {
-  position: absolute;
+  position: fixed;
   right: 2%;
   bottom: 0;
   width: 120px;
   height: 90px;
+  z-index: 100;
+}
+
+.otter-deco.above {
+  left: 2%;
+  top: 0;
+  transform: scale(-1, -1);
 }
 
 .scheduling-venue {
@@ -222,30 +239,11 @@ h1 {
 }
 
 .scheduling a {
-  text-decoration: none;
-  color: black;
-  display: block;
-  padding: 1rem;
+  color: white;
 }
 
 .scheduling a:hover {
   font-weight: 800;
-}
-
-.venue {
-  text-align: left;
-  margin: 0 2rem 0 0.1rem;
-  padding-left: 1.5rem;
-  flex: 3 0px;
-  padding-bottom: 1.5rem;
-}
-
-.venue h2 {
-  margin-bottom: 1rem;
-}
-
-.venue p {
-  padding-bottom: 1.5rem;
 }
 
 .label-family {
