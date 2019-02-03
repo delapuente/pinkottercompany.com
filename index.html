@@ -13,40 +13,42 @@
       <script defer src="dist/bundle.js"></script>
     </head>
     <body>
-      <header>
-        <img src="imgs/coupleheader.png">
-        <h1>Bea & Salva</h1>
-        <div>
-          <img src="imgs/otter-placeholder.png">
-          <img src="imgs/foxgy-placeholder.png">
-        </div>
-      </header>
-      <section id="gaming-area">
-        <section class="cover">
-          <button id="start">Jugar</button>
-          <p class="notice" hidden>Esto es muy pequeño para jugar.<br/>¡Gira la pantalla!</p>
+      <section class="arcade">
+        <header>
+          <img src="imgs/header.jpg" />
+          <h1>La boda de Bea y Salva</h1>
+        </header>
+        <section id="gaming-area">
+          <section class="cover">
+            <button id="start">Jugar</button>
+            <p class="notice" hidden>Esto es muy pequeño para jugar.<br/>¡Gira la pantalla!</p>
+          </section>
+          <canvas id="game"></canvas>
         </section>
-        <canvas id="game"></canvas>
+        <section class="control">
+          <img src="imgs/controlPanel.jpg" />
+        </section>
+        <section class="scheduling">
+          <section class="appointment">
+            <h2>Para la familia</h2>
+            <p class="place">MADRID</p>
+            <p class="weekday">SÁBADO</p>
+            <p class="day">30 DE MARZO</p>
+            <hr/>
+            <p class="hour">12:00 h</p>
+          </section>
+          <section class="appointment">
+            <h2>Para los amigos</h2>
+            <p class="place">MADRID</p>
+            <p class="weekday">SÁBADO</p>
+            <p class="day">30 DE MARZO</p>
+            <hr/>
+            <p class="hour">18:00 h</p>
+          </section>
+          <img class="otter-deco" src="imgs/otterbig.png">
+        </section>
       </section>
-      <section class="date-hour">
-        <div>
-          <h2>Para la familia</h2>
-          <h3>MADRID</h3>
-          <p class="weekday">SÁBADO</p>
-          <p class="day">30 DE MARZO</p>
-          <hr/>
-          <p class="hour">12:00 h</p>
-        </div>
-        <div>
-          <h2>Para los amigos</h2>
-          <h3>MADRID</h3>
-          <p class="weekday">SÁBADO</p>
-          <p class="day">30 DE MARZO</p>
-          <hr/>
-          <p class="hour">18:00 h</p>
-        </div>
-        <img class="otter-deco" src="imgs/otterbig.png">
-      </section>
+      <!--
       <section class="scheduling-venue">
         <nav class="scheduling">
           <ul>
@@ -83,58 +85,71 @@
             Ver en un mapa</a>
         </aside>
       </section>
+      -->
       <section class="photo-mosaic">
         <img src="imgs/PhotoMosaic.png">
       </section>
-      <section class="info-details">
-        <div>
-          <img src="imgs/housing.png">
-          <h2>Alojamiento</h2>
-          <p>Aprovechando que el evento se realiza en un hotel, los invitados
-          se podrán aprovechar de un <b>descuento especial del 10%</b> en las habitaciones.
-          Si estáis interesados, contactad con nosotros para más información.</p>
-        </div>
+      <section>
+        <section class="info-details" data-aos="fade">
+          <div>
+            <img src="imgs/housing.png">
+            <div>
+              <h2>Alojamiento</h2>
+              <p>Aprovechando que el evento se realiza en un hotel, los invitados
+            se podrán aprovechar de un <b>descuento especial del 10%</b> en las habitaciones.
+            Si estáis interesados, contactad con nosotros para más información.</p>
+            </div>
+          </div>
+        </section>
+        <section class="info-details">
+          <div>
+            <img src="imgs/tranposrtation.png">
+            <div>
+              <h2>Transporte</h2>
+              <p>El lugar de la celebración está en plena Gran Vía, una de las
+                principales calles del centro de Madrid. Para llegar allí, ya que el
+                centro tiene restricciones de acceso a vehículos privados sin etiqueta
+                mediambiental, aconsejamos el uso de transporte público.</p>
+            </div>
+          </div>
+        </section>
+        <section class="info-details" data-aos="slide-right">
+          <div>
+            <img src="imgs/present.png">
+            <div>
+              <h2>Regalos</h2>
+              <p>No queremos ningún regalo en especial por la boda.
+              Pero si queréis regalarnos algo, ¡venid a hacernos una visita cuando estemos en New York!
+              Eso sería un regalo genial.</p>
+            </div>
+          </div>
+        </section>
+        <section class="info-details">
+          <div>
+            <img src="imgs/suit.png">
+            <div>
+              <h2>Código de vestimenta</h2>
+              <p>Nosotros preferimos que la vestimenta sea informal.
+              No detendremos a nadie que quiera ponerse de gala, pero preferimos que os encontréis
+              cómodos.</p>
+              <p>Eso sí, si queréis ayudarnos con la temática de la boda, ¡podéis añadir al traje
+              <b>vuestro propio detalle de pixel art!</b></p>
+            </div>
+          </div>
+        </section>
+        <section class="info-details">
+          <div>
+            <img src="imgs/weather.png">
+            <div>
+              <h2>Temperaturas</h2>
+              <p>Marzo en Madrid es bastante impredecible, pero por norma general suele ser fresco.
+            Las temperaturas medias están entre los 16º de máxima y los 6º de mínimas,
+            y aunque lo normal es que no llueva, siempre nos puede sorprender una tormenta primaveral
+            (¡esperemos que no!).</p>
+            </div>
+          </div>
+        </section>
       </section>
-      <section class="info-details">
-        <div>
-          <img src="imgs/tranposrtation.png">
-          <h2>Transporte</h2>
-          <p>El lugar de la celebración está en plena Gran Vía, una de las
-            principales calles del centro de Madrid. Para llegar allí, ya que el
-            centro tiene restricciones de acceso a vehículos privados sin etiqueta
-            mediambiental, aconsejamos el uso de transporte público.</p>
-        </div>
-      </section>
-      <section class="info-details">
-        <img src="imgs/present.png">
-        <div>
-          <h2>Regalos</h2>
-          <p>No queremos ningún regalo en especial por la boda.
-            Pero si queréis regalarnos algo, ¡venid a hacernos una visita cuando estemos en New York!
-            Eso sería un regalo genial.</p>
-        </div>
-      </section>
-      <section class="info-details">
-        <img src="imgs/suit.png">
-        <div>
-          <h2>Código de vestimenta</h2>
-          <p>Nosotros preferimos que la vestimenta sea informal.
-            No detendremos a nadie que quiera ponerse de gala, pero preferimos que os encontréis
-            cómodos.</p>
-          <p>Eso sí, si queréis ayudarnos con la temática de la boda, ¡podéis añadir al traje
-            <b>vuestro propio detalle de pixel art!</b></p>
-        </div>
-      </section>
-      <section class="info-details">
-        <img src="imgs/weather.png">
-        <div>
-          <h2>Temperaturas</h2>
-          <p>Marzo en Madrid es bastante impredecible, pero por norma general suele ser fresco.
-          Las temperaturas medias están entre los 16º de máxima y los 6º de mínimas,
-          y aunque lo normal es que no llueva, siempre nos puede sorprender una tormenta primaveral.</p>
-          <p>(¡Esperemos que no!)</p>
-        </div>
-      <div id="bottom"></div>
     </body>
     <footer></footer>
 </html>
