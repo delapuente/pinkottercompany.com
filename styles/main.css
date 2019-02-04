@@ -349,6 +349,11 @@ h1 {
 
 footer {
   min-height: 20vw;
+  background-image: url(../imgs/winRings.gif);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 40vw;
+  image-rendering: crisp-edges;
 }
 
 @media all and (min-width: 600px) {
