@@ -349,7 +349,12 @@ h1 {
 }
 
 footer {
-  min-height: 20vw;
+  min-height: 20vh;
+  overflow-y: hidden;
+}
+
+footer > div {
+  min-height: 20vh;
   background-image: url(../imgs/winRings.gif);
   background-repeat: no-repeat;
   background-position: center bottom;
