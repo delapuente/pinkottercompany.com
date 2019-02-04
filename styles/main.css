@@ -7,6 +7,7 @@ html {
   font-family: "Roboto Condensed", sans-serif;
   /* min-fs + (max-fs - min-fs) * ((viewport-width - min-vw) / (max-vw - min-vw)) */
   font-size: calc(10px + (20 - 10) * ((900px - 340px) / (900 - 340)));
+  overflow-x: hidden;
 }
 
 body {
