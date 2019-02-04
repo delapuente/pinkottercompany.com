@@ -141,15 +141,16 @@ h1 {
   background-color: rgba(43, 187, 204, 0.85);
 }
 
-.venue {
+.wide {
+  width: 718px;
   line-height: 0;
 }
 
-.venue > * {
+.wide > * {
   line-height: normal;
 }
 
-.venue iframe {
+.wide iframe {
   margin-top: 0.5rem;
 }
 
@@ -354,15 +355,4 @@ footer {
   background-position: center bottom;
   background-size: 40vw;
   image-rendering: crisp-edges;
-}
-
-@media all and (min-width: 600px) {
-  .article-aside { flex: 1 0 0; }
-}
-
-@media all and (min-width: 750px) {
-  .venue { flex: 3 0px; }
-  .aside-photo { order: 1; }
-  .venue { order: 2; }
-  .aside-place { order: 3; }
 }
