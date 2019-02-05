@@ -322,11 +322,11 @@ h1 {
 .info-details {
   margin: 4rem auto;
   margin-left: 10%;
-  padding-left: 19.9vh;
+  padding-left: 24.9vh;
   background-image: url(../imgs/foxgyPlane.gif);
   background-repeat: no-repeat;
   background-position: 0 center;
-  background-size: 20vh auto;
+  background-size: 25vh auto;
 }
 
 .info-details p {
@@ -337,7 +337,7 @@ h1 {
   margin-left: 0;
   margin-right: 10%;
   padding: 0;
-  padding-right: 19.9vh;
+  padding-right: 24.9vh;
   background-image: url(../imgs/foxgyPlaneFlip.gif);
   background-position: right center;
 }
@@ -379,6 +379,7 @@ h1 {
 footer {
   min-height: 20vw;
   overflow-y: hidden;
+  margin-bottom: 0.5rem;
 }
 
 footer > div {
@@ -389,8 +390,20 @@ footer > div {
   background-size: 40vw;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 900px) {
   .info-details img {
     display: none;
+  }
+
+  .info-details {
+    margin-left: 5%;
+    padding-left: 19.9vh;
+    background-size: 19.9vh auto;
+  }
+
+  .info-details:nth-child(2n) {
+    margin-left: 0;
+    margin-right: 5%;
+    padding-right: 19.9vh;
   }
 }
