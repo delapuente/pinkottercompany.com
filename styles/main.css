@@ -6,7 +6,8 @@
 html {
   font-family: "Roboto Condensed", sans-serif;
   /* min-fs + (max-fs - min-fs) * ((viewport-width - min-vw) / (max-vw - min-vw)) */
-  font-size: calc(10px + (20 - 10) * ((900px - 340px) / (900 - 340)));
+  font-size: calc(8px + (20 - 8) * ((900px - 320px) / (900 - 320)));
+  image-rendering: crisp-edges;
 }
 
 body {
@@ -14,7 +15,7 @@ body {
   url(../imgs/backgroundsky.svg);
   background-repeat: no-repeat;
   background-position: center bottom, center;
-  background-size: 101%, cover;
+  background-size: 100%, cover;
   width: 100%;
   overflow-x: hidden;
 }
@@ -51,7 +52,8 @@ header {
 
 header img {
   width: 100%;
-	height: auto;
+  height: auto;
+  align-self: flex-end;
 }
 
 .separator {
@@ -122,6 +124,7 @@ h1 {
   max-width: 90%;
   align-self: center;
   font-family: 'Press Start 2P', cursive;
+  font-size: 3vw;
 }
 
 .scheduling {
@@ -198,8 +201,8 @@ h1 {
   position: fixed;
   right: 2%;
   bottom: 0;
-  width: 120px;
-  height: 90px;
+  width: 15vw;
+  height: auto;
   z-index: 100;
 }
 
@@ -311,15 +314,19 @@ h1 {
   z-index: -1;
   margin-top: -2rem;
   transform: rotateZ(7deg);
+  max-width: 500px;
+  width: 80%;
+  height: auto;
 }
 
 .info-details {
   margin: 4rem auto;
   margin-left: 10%;
-  padding-left: 250px;
+  padding-left: 19.9vh;
   background-image: url(../imgs/foxgyPlane.gif);
   background-repeat: no-repeat;
   background-position: 0 center;
+  background-size: 20vh auto;
 }
 
 .info-details p {
@@ -330,7 +337,7 @@ h1 {
   margin-left: 0;
   margin-right: 10%;
   padding: 0;
-  padding-right: 250px;
+  padding-right: 19.9vh;
   background-image: url(../imgs/foxgyPlaneFlip.gif);
   background-position: right center;
 }
@@ -349,6 +356,11 @@ h1 {
 .info-details img {
   flex-shrink: 0;
   margin-right: 1.5rem;
+}
+
+.info-details:nth-child(2n) img {
+  margin: 0;
+  margin-left: 1.5rem;
 }
 
 .info-details h2 {
@@ -375,5 +387,10 @@ footer > div {
   background-repeat: no-repeat;
   background-position: center bottom;
   background-size: 40vw;
-  image-rendering: crisp-edges;
+}
+
+@media (max-width: 540px) {
+  .info-details img {
+    display: none;
+  }
 }
