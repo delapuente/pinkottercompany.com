@@ -10,13 +10,13 @@ html {
 }
 
 body {
-    background-image: url(../imgs/backgroundmadrid.svg),
-    url(../imgs/backgroundsky.svg);
-    background-repeat: no-repeat;
-    background-position: center bottom, center;
-    background-size: 101%, cover;
-    width: 100%;
-    overflow-x: hidden;
+  background-image: url(../imgs/backgroundmadrid.svg), 
+  url(../imgs/backgroundsky.svg);
+  background-repeat: no-repeat;
+  background-position: center bottom, center;
+  background-size: 101%, cover;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .arcade {
@@ -305,12 +305,12 @@ h1 {
 }
 
 .cheat-sheet {
- margin: 0 auto;
- display: block;
- position: relative;
- z-index: -1;
- margin-top: -2rem;
- transform: rotateZ(7deg);
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  z-index: -1;
+  margin-top: -2rem;
+  transform: rotateZ(7deg);
 }
 
 .info-details {
