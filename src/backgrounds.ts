@@ -1,13 +1,5 @@
 import { Layers } from './depths';
-
-function oneOf<T>(l: Array<T>): T {
-  return l[Math.floor(Math.random() * l.length)];
-}
-
-function between(min: number, max: number): number {
-  const length = max - min;
-  return Math.random() * length + min;
-}
+import { oneOf, between} from './utils';
 
 class Decoration extends Phaser.Physics.Arcade.Sprite {
   constructor(scene: Phaser.Scene) {
@@ -84,6 +76,14 @@ class CloudDecoration extends Decoration {
 
 export class BgManager extends Phaser.GameObjects.GameObject {
 
+  events: Phaser.Events.EventEmitter = new Phaser.Events.EventEmitter();
+
+  private _stopped: boolean = false;
+
+  private _duration: number = 1.5 * 60 * 1000;
+
+  private _background: Phaser.GameObjects.Image;
+
   private _ground: Phaser.GameObjects.Sprite;
 
   private _groundHeight: number;
@@ -104,6 +104,9 @@ export class BgManager extends Phaser.GameObjects.GameObject {
     super(scene, 'bg-manager');
     this._ground = ground;
     this._groundHeight = this.scene.cameras.main.height - this._ground.height;
+    this._background = scene.add.image(scene.cameras.main.width, this._groundHeight, 'madrid');
+    this._background.setOrigin(0, 1);
+    this._background.depth = bgDepth * 2;
     this._bgDepth = bgDepth;
     this._fgDepth = fgDepth;
     this._grass = this.scene.physics.add.group({
@@ -120,6 +123,7 @@ export class BgManager extends Phaser.GameObjects.GameObject {
   }
 
   stop() {
+    this._stopped = true;
     this._grassEnabled = false;
     this._cloudsEnabled = false;
     this._grass.setVelocity(0, 0);
@@ -128,7 +132,7 @@ export class BgManager extends Phaser.GameObjects.GameObject {
     }, this);
   }
 
-  update() {
+  update(time: number, delta: number) {
     if (this._grassEnabled && Math.random() < 0.4) {
       const grass = this._grass.get();
       if (grass) {
@@ -140,6 +144,13 @@ export class BgManager extends Phaser.GameObjects.GameObject {
       const cloud = this._clouds.get();
       if (cloud) {
         cloud.show(this._groundHeight / 6 * 5, this._bgDepth);
+      }
+    }
+
+    if (!this._stopped) {
+      this._background.x -= delta / this._duration * this._background.width;
+      if (this._background.getBottomRight().x < this.scene.cameras.main.width / 2) {
+        this.events.emit('end-of-bg');
       }
     }
   }

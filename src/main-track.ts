@@ -5,6 +5,7 @@ import { HappyOMeter, Rings } from './ui';
 import { BgManager } from './backgrounds';
 import { Layers } from './depths';
 import { physicalResolution } from './size';
+import { between } from './utils';
 
 export class MainTrack extends Phaser.Scene {
 
@@ -35,6 +36,7 @@ export class MainTrack extends Phaser.Scene {
   preload() {
     this.load.image('bg', 'assets/environments/background-test.png');
     this.load.image('ground', 'assets/environments/ground-line.png');
+    this.load.image('madrid', 'assets/environments/background-madrid.png');
     this.load.atlas(
       'characters',
       'assets/characters/characters.png',
@@ -66,7 +68,7 @@ export class MainTrack extends Phaser.Scene {
       Rings
     ].forEach(klass => klass.setupAnimations(this));
 
-    const bg = this.add.image(0, 0, 'bg').setOrigin(0, 0);
+    this.add.image(0, 0, 'bg').setOrigin(0, 0);
 
     const ground = this.physics.add.staticGroup();
     this.groundLine = ground.create(
@@ -102,7 +104,7 @@ export class MainTrack extends Phaser.Scene {
       this.player
     );
 
-    this._backButton = this.add.image(5, 5, 'ui', 'BackArrow.png');
+    this._backButton = this.add.image(20, 20, 'ui', 'BackArrow.png');
     this._backButton.depth = Layers.UI;
     this._backButton.setOrigin(0, 0);
     this._backButton.setInteractive();
@@ -115,6 +117,7 @@ export class MainTrack extends Phaser.Scene {
         this.scene.transition({
           target: 'player-selection'
         });
+        this.cameras.main.fadeOut(400);
       }
     });
 
@@ -125,6 +128,7 @@ export class MainTrack extends Phaser.Scene {
     // Quick win trigger
     this.input.keyboard.once('keydown_F', this.winningSequence, this);
     this.hapyness.events.once('top', this.winningSequence, this);
+    this.background.events.once('end-of-bg', this.winningSequence, this);
 
     this.physics.add.collider(this.player, ground);
     this.physics.add.collider(this.obstacles, ground);
@@ -180,11 +184,12 @@ export class MainTrack extends Phaser.Scene {
   update(time: number, delta: number) {
     this.control.update(time, delta);
     this.hapyness.update(time, delta);
-    this.background.update();
+    this.background.update(time, delta);
     this.rings.update();
     if (this.throwObstacles && this.anotherObstacle) {
       this.anotherObstacle = false;
-      setTimeout(() => this.anotherObstacle = true, 1000);
+      const lapse = Math.random() < 0.15 ? 150 : between(1000, 1500);
+      setTimeout(() => this.anotherObstacle = true, lapse);
       const cacota = this.obstacles.get();
       cacota.depth = Layers.OBSTACLES;
       cacota.show(physicalResolution.width, physicalResolution.height/2);
