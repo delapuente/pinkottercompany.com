@@ -4,6 +4,12 @@ import { MainTrack } from './main-track';
 import { PlayerSelection } from './player-selection';
 import { physicalResolution } from './size';
 
+declare global {
+  interface HTMLElement {
+    webkitRequestFullScreen: () => Promise<void>;
+  }
+}
+
 const canvas = document.querySelector('canvas');
 
 const config = {
@@ -38,7 +44,9 @@ document.querySelector('#start').addEventListener('click', () => {
   const gameCover: HTMLElement = document.querySelector('#gaming-area .cover');
   gameCover.hidden = true;
   if (isMobile.any) {
-    canvas.requestFullscreen();
+    const requestFullScreen =
+      (canvas.requestFullscreen || canvas.webkitRequestFullScreen).bind(canvas);
+    requestFullScreen();
   }
   game.scene.start('player-selection');
 });

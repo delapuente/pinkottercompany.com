@@ -7,6 +7,13 @@ import { Layers } from './depths';
 import { physicalResolution } from './size';
 import { between } from './utils';
 
+declare global {
+  interface Document {
+    webkitIsFullScreen?: boolean;
+    webkitExitFullscreen: () => Promise<void>;
+  }
+}
+
 export class MainTrack extends Phaser.Scene {
 
   control: Control;
@@ -109,9 +116,11 @@ export class MainTrack extends Phaser.Scene {
     this._backButton.setOrigin(0, 0);
     this._backButton.setInteractive();
     this._backButton.on('pointerdown', () => {
-      const isFullscreen = document.fullscreen;
+      const isFullscreen = document.fullscreen || document.webkitIsFullScreen;
       if (isFullscreen) {
-        document.exitFullscreen();
+        const exitFullscreen =
+          (document.exitFullscreen || document.webkitExitFullscreen).bind(document);
+        exitFullscreen();
       }
       else {
         this.scene.transition({
